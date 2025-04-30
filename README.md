@@ -6,10 +6,10 @@ This project contains several samples of how to using Kubernetes components (bas
 
 Content:
 
-- **Pods** [](pod/README.md)
-- **ReplicaSets** [](replicaSet/README.md)
-- **Deployments** [](deployment/README.md)
-- **Services** [](deployment/README.md)
+- **[Pods samples](pod/README.md)**
+- **[ReplicaSets samples](replicaSet/README.md)**
+- **[Deployments](deployment/README.md)**
+- **[Services](deployment/README.md)**
 - k8s-hands-on[_vX]. Step by step coding sample.
 
 
