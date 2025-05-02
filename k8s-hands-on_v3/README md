@@ -1,0 +1,6 @@
+## Creación de frontend
+
+#### Creación de Service
+
+* Creamos pod temporal (**kubectl run --rm -ti  podtest3 --image=nginx:alpine -- sh**) y le añadimos curl (**apk add curl**) para simular el front.
+
