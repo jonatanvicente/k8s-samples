@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: k8s-hands-on
+        image: k8s-hands-on:v2
         imagePullPolicy: IfNotPresent  # para que intente primero con image de local en lugar de repo remoto
 ---
 apiVersion: v1

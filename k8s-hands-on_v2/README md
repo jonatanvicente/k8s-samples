@@ -16,7 +16,7 @@
 
 * Creamos un pod de pruebas para ver si podemos acceder al ClusterIP (**kubectl run --rm -ti podtest3 --image=nginx:alpine -- sh**)
 * Instalamos curl en el container (**apk add -U curl**).
-* Ejecutamos curl [clusterIP]. Es accesible (sale por 80).
+* Ejecutamos curl [clusterIP] (disponible en Services en Lens). Es accesible (sale por 80).
     - Sucesivas invocaciones indican hostnames diferentes (un pod diferente atiende la petición)
 * Ejecutamos **kubectl get svc** para obtener dns del cluster
     - Ejecutamos curl [name]:80. Accesible también.
