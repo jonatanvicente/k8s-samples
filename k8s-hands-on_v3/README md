@@ -19,6 +19,6 @@
 * Verificamos **kubectl get svc**. Frontend service tiene NodePort
 * Error CORS:
     - Intentamos allow-origin en backend, o accediendo desde index por ip/dns.
-    - Pods de front resuelven bien y obtienen respuesta accediendo por ip/dns, pero no resuelve.
-    - **En todo caso usamos el port forwarding que permite Lens, no es visible desde el port del cluster**
-    - Probamos acceso a cluster con imágenes nginx (ok)
+    - Pods de front resuelven bien y obtienen respuesta accediendo por ip/dns (entrando en cada pod)
+    - Sin embargo, la pagina html no resuelve backend con la ip interna o el dns (aunque muestra correctamente código estático).
+    - Deberemos establecer un NodePort en lugar de un ClusterIP para backend, o bien un proxy en front.
