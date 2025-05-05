@@ -17,3 +17,8 @@
 * Construimos image (OJO que tag debe coincidir con el que pusimos en el manifest frontend.yml) **docker build -t frontend-k8s-hands-on:v1 -f Dockerfile .**
 * Desplegamos **kubectl apply -f frontend.yml**
 * Verificamos **kubectl get svc**. Frontend service tiene NodePort
+* Error CORS:
+    - Intentamos allow-origin en backend, o accediendo desde index por ip/dns.
+    - Pods de front resuelven bien y obtienen respuesta accediendo por ip/dns, pero no resuelve.
+    - **En todo caso usamos el port forwarding que permite Lens, no es visible desde el port del cluster**
+    - Probamos acceso a cluster con imágenes nginx (ok)

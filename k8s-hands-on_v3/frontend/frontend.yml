@@ -17,6 +17,7 @@ spec:
       containers:
       - name: frontend
         image: frontend-k8s-hands-on:v1
+        #image: nginx:alpine
         imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1

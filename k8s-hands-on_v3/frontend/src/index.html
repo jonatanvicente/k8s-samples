@@ -1,16 +1,32 @@
-<div id="id01"></div>
-<img src="https://raw.githubusercontent.com/kubernetes/kubernetes/893486dfd16ff8c628c6f33bb2bea869ad86115f/logo/logo.svg"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Response Example</title>
+</head>
+<body>
+  <h1>Backend JSON Response:</h1>
+  <pre id="response">Waiting for response...</pre>
 
-<script>
-    var xmlhttp = new XMLHttpRequest();
-    var url = "http://backend-k8s-hands-on";
+  <script>
+    // Replace with your actual backend URL
+    //const backendUrl = 'http://backend-k8s-hands-on';
+    const backendUrl = '10.96.118.80';
 
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200){
-            var myArr = JSON.parse(this.responseText);
-            document.getElementById("id01").innerHTML = "<h2>La hora es " + resp.time + " y el hostname es " + resp.hostname + "</h2>";
+    fetch(backendUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-</script>
+        return response.json(); // Parse response as JSON
+      })
+      .then(data => {
+        // Pretty-print the JSON
+        document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        document.getElementById('response').textContent = 'Error: ' + error.message;
+      });
+  </script>
+</body>
+</html>
