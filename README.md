@@ -13,7 +13,8 @@ Content:
 - k8s-hands-on[_vX]. Step by step coding sample.
 - **[Namespaces samples](namespaces/README.md)**
 - **[Limits & Requests samples](limits-requests/README.md)**
-
+- **[Limit Range](limit-range/README.md)**
+- **[Resource Quota](resource-quota/README.md)**
 
 
 

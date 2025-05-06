@@ -15,4 +15,6 @@
 
 ##### CPUs
 
-* limit-cpu.yml
+* limit-cpu.yml. Ejemplo de exceder valor de cpu's
+* limit-cpu2.yml.
+    * Vemos numero de cpu's en maquina con **kubectl describe node minikube**.
