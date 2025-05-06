@@ -11,6 +11,8 @@ Content:
 - **[Deployments](deployment/README.md)**
 - **[Services](deployment/README.md)**
 - k8s-hands-on[_vX]. Step by step coding sample.
+- **[Namespaces samples](namespaces/README.md)**
+- **[Limits & Requests samples](limits-requests/README.md)**
 
 
 
