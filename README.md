@@ -15,6 +15,8 @@ Content:
 - **[Limits & Requests samples](limits-requests/README.md)**
 - **[Limit Range](limit-range/README.md)**
 - **[Resource Quota](resource-quota/README.md)**
+- **[Probes](probes/README.md)**
+- **[Environment Variables](envs/README.md)**
 
 
 
