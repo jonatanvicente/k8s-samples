@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: registry.k8s.io/busybox:1.27.2
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600  #comando: creamos file; sleep, borrar file sleep
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy  #cat del file creado. En el segundo numero 35 no estará el file y habrá fallo
+      initialDelaySeconds: 5
+      periodSeconds: 5
