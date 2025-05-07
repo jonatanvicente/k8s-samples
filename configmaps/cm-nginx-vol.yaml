@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: nginx-config
+    labels:
+        app: front
+data:
+    test: hola
+    nginx: |
+      server {
+            listen       80;
+            server_name  localhost;
+
+            location / {
+                root   /usr/share/nginx/html;
+                index  index.html index.htm;
+            }
+
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   /usr/share/nginx/html;
+                }
+            }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-test
+  labels:
+    app: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          volumeMounts:
+          - name: nginx-vol
+            mountPath: /etc/nginx/conf.d  #ruta del volumen dentro del contenedor del pod (sólo hasta el folder)
+      volumes:
+        - name: nginx-vol  # igual al nombre de arriba
+          configMap:
+            name: nginx-config
+            items:   #llaves dentro del configmap. OJO Si no indicamos los items, k8s montaría todo el contenido de la folder
+            - key: nginx  # dentro del configmap
+              path: default.conf  # ruta una vez esté montado el volume dentro del dir (nombre del file en este caso)
+
+
