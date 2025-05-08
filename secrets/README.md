@@ -1,4 +1,6 @@
 
+## Secrets
+
 
 #### Creación de un secret desde un file txt
 
@@ -8,7 +10,6 @@
     - **kubectl create secret generic mysecret --from-file=./secret-files/test.txt**
     - **kubectl get secrets -o yaml**
     - **kubectl describe secrets mysecret**
-
 
 #### Creación de un secret desde manifest
 
@@ -30,3 +31,10 @@
 - Creación de manifest con secrets y un pod en pod-vol-secret.yml
 - Los user/password los fijamos en el secret como stringData (paso a base64)
 - Creamos los volumes que pasarán los credenciales a files (user/password)
+- Se pueden cargar los credenciales leyendo el file, p.ej.
+
+#### Fijar credenciales con volumes + env vars
+
+- Creación de manifest con secrets y un pod en pod-vol-and-envs.yml
+- Creamos env vars que apuntan al secret creado arriba
+- Más fácil cargar credenciales como env vars que leyendo de file (en ejemplo anterior)

@@ -1,6 +1,6 @@
 
 
-# Limit Ranges
+## Limit Ranges
 
 * Creación default de limit-range en default-cpu-mem.yml.
     * Creamos namespace y limit-range asociado

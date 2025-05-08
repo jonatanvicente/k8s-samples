@@ -18,7 +18,7 @@ Content:
 - **[Probes](probes/README.md)**
 - **[Environment Variables](envs/README.md)**
 - **[ConfigMaps](configmaps/README.md)**
-
+- **[Secrets](secrets/README.md)**
 
 
 

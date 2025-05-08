@@ -1,6 +1,6 @@
 
 
-#### ResourceQuota
+### ResourceQuota
 
 * Creamos ResourceQuota junto con namespace
 * Añadimos un Deployment

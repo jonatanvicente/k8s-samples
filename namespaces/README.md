@@ -1,6 +1,6 @@
 
 
-### Namespaces
+## Namespaces
 
 * Creación de 2 namespaces (dev y pro) con 1 y 5 replicas respectivamente en ns.yml
 ```shell
