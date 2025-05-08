@@ -17,9 +17,16 @@
 
 #### Ocultación de credenciales / sustitución de valores
 
-- Creación de file con secrets ocultos (secret-secure.yml). k8s no hace la sustitución correctamente de valores cuando damos valores a env vars
+- Creación de file con secrets ocultos (secret-secure.yml). k8s no hace la sustitución correctamente de placeholders cuando damos valores a env vars
 - Ocultación y fijación de valores
     -   Creamos file con referencia a env vars (secret-secure_2.yml)
     -   Utilizamos tool envsubst para sustituir el valor del file por las env vars previamente creadas
     -   Volcamos a un nuevo file NO guardado en CVS (**envsubst < secret-secure_2.yml > tmp.yml**)
     -   Aplicamos el nuevo file (**kubectl apply -f tmp.yml**)
+
+
+#### Fijar credenciales con volumes
+
+- Creación de manifest con secrets y un pod en pod-vol-secret.yml
+- Los user/password los fijamos en el secret como stringData (paso a base64)
+- Creamos los volumes que pasarán los credenciales a files (user/password)
