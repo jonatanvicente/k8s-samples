@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual # no será dinámico
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce  # se puede usar una sola vez al tiempo. Dos pods no pueden acceder a la misma vez
+  hostPath:
+    path: "/test"  # dónde estará el almacenamiento real tras el PV. Aquí se guardarán los datos del pod
+---
+apiVersion: v1  #Al no especificar que PV vamos a emplear, k8s intentará buscar un recursos que coincida (por capacidad, storageClassName, etc)
+kind: PersistentVolumeClaim  # Si tuviéramos muchos PV-PVC, tendríamos que utilizar labels y selectors para discriminar
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
