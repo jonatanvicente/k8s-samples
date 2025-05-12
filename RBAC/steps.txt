@@ -2,19 +2,9 @@
 minikube start --vm-driver=none --extra-config=apiserver.authorization-mode=RBAC
 
 ## Create keys and sign
-
-### aparecerá en dir jonatan.key
 openssl genrsa -out jonatan.key 2048
-
-### creamos CSR (file) con la key generada previamente. Asignamos CommonName y Organization que k8s usará después (O ficticia)
-### habitualmente el developer creará su CSR para solicitar acceso y enviarlo al admin de k8s
 openssl req -new -key jonatan.key -out jonatan.csr -subj "/CN=jonatan/O=dev"
-
-### kubectl config view nos permite ver CA location
-### Firma del certificado con la CA (revisando location de ca.crt y ca.key)
-### jonatan.crt será el certificado de user firmado por la CA
 sudo openssl x509 -req -in jonatan.csr -CA /root/.minikube/ca.crt -CAkey /root/.minikube/ca.key -CAcreateserial -out jonatan.crt -days 500
-### validamos que escribimos bien el CN
 openssl x509 -in jonatan.crt -noout -text
 
 ## Isolated env

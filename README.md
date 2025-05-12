@@ -19,7 +19,8 @@ Content:
 - **[Environment Variables](envs/README.md)**
 - **[ConfigMaps](configmaps/README.md)**
 - **[Secrets](secrets/README.md)**
-
+- **[Volumes](volumes/README.md)**
+- **[Role Based Access Control (RBAC)](RBAC/README.md)**
 
 
 

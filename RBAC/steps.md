@@ -33,11 +33,17 @@ Utilizaremos una maquina distinta para firmar el crt del nuevo user y para inten
 
 ### Secuencia de firma de crt de user en la misma maquina
 
-* **kubectl config set-cluster minikube --server=https://192.168.49.2:8443 --certificate-authority=/home/Jonatan.minikube/ca.crt**
+* **kubectl config set-cluster minikube --server=https://192.168.49.2:8443 --certificate-authority=/home/Jonatan/.minikube/ca.crt**
 * **kubectl config set-credentials jonatan --client-certificate=jonatan.crt --client-key=jonatan.key**
 * **kubectl config set-context jonatan --cluster=minikube --user=jonatan**
 * **kubectl config use-context jonatan**
 * **kubectl config get-contexts** nos arroja el nuevo contexto con nuevo usuario
+
+
+### Switch entre contexts / users
+
+* **kubectl config get-contexts**
+* **kubectl config use-context jonatan**. 
 
 
 
