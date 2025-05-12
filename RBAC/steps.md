@@ -1,6 +1,6 @@
 ## RBAC
 
-## Steps
+## Steps (explicación de steps.txt)
 
 * Arranque de minikube indicando el modo de auth (**minikube start --vm-driver=none --extra-config=apiserver.authorization-mode=RBAC)**
 

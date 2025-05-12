@@ -1,2 +1,4 @@
-jonatan.* filter=git-crypt diff=git-crypt
+*.crt filter=git-crypt diff=git-crypt
+*.csr filter=git-crypt diff=git-crypt
+*.key filter=git-crypt diff=git-crypt
 .gitattributes !filter !diff
