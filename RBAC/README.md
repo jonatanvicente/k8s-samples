@@ -16,3 +16,13 @@
 - El usuario **jonatan** ni siquiera puede crear pods.
     -  **kubectl config use-context jonatan**
     -  **kubectl apply -f ../pod/pod.yaml** no se puede ejecutar (p.ej.)
+
+
+#### Uso con ConfigMaps
+
+- Creamos cm-role.yml con namespace incluido
+    - Damos permisos sobre configmaps en namespace dev
+    - Ejecutamos con admin (**kubectl config use-context minikube**)
+    - Verificamos creación de ConfigMap (**kubectl get cm -n dev**) y visualización con user jonatan en namespace dev (**kubectl get cm -n dev**). En default jonatan no tiene permisos
+    -  **kubectl edit cm** no puede editar. Tendriamos que aplicar "patch" a los verbos. Aplicamos.
+    -  Le damos permisos de borrado (verb "delete") con admin y, con user jonatan, borramos CM (**kubectl delete cm vars -n dev**) del namespace dev
