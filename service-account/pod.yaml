@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podtest2
+spec:
+  serviceAccountName: serviceaccounttest  #Bound with my own ServiceAccount
+  containers:
+      - name: cont1
+        image: nginx:alpine
+

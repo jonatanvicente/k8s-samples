@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: long-lived-token
+  annotations:
+    kubernetes.io/service-account.name: serviceaccounttest  # nombre del ServiceAccount asociado
+type: kubernetes.io/service-account-token  # Imprescindible en esta cuenta k8s
