@@ -1,5 +1,4 @@
 
-
 ### Services
 
 - Ver file svc.yaml
@@ -17,3 +16,17 @@
 	- get pods muestra los 6 pods (filtramos con <b>kubectl get pods -l app=front</b> o <b>app=backend</b>)
 	- <b>kubectl get svc</b> arroja ambos servicios (my-service y my-service1, además de kubernetes)
 		- Bajo PORT(S) vemos el port que expone NodePort (p.ej. 8080:31078/TCP)
+
+Para accesos desde fuera del cluster k8s a los servicios expuestos, véanse las siguientes secciones **Port Forwarding** y **minikube tunnel**
+
+#### Port Forwarding
+
+- Para exponer cualquier puerto del cluster (con propósitos de **desarrollo**), es necesario hacer port-forwarding. Para acceder a la salida del servicio:
+    -  Desde localhost **kubectl port-forward service/[myService] -n [namespace] [external_port]:[pod_port]**
+    - Para acceso desde cualquier IP **kubectl port-forward service/[myService] -n [namespace] [external_port]:[pod_port] --address 0.0.0.0**
+
+
+#### minikube tunnel
+
+- Para ejecutar un tunnel y hacer accesible cualquier servicio podemos hacer un tunnel con
+    - **minikube service ingress-nginx-controller -n ingress-nginx  --url [url]**
