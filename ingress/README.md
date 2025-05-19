@@ -7,6 +7,7 @@ Pasos a seguirr:
 - Creamos ClusterIP para acceso a los pods y verificamos acceso desde un pod temporal
 - Creamos Ingress Controller a mano (**no como minikube addon**)
 - Creamos Ingress Rules manejadas por Ingress Controller
+    -  Podremos crearlas por **Path** o por **Host**
 
 ### Instalación como minikube addon
 
@@ -54,7 +55,7 @@ Pasos a seguirr:
         - El servicio está accesible: vemos salida configurada nginx en ingress-example.yml.
         - OJO que aplicación todavía no está expuesta desde fuera del cluster, tan sólo llegamos a página de inicio de nginx (que hemos modificado). Necesitamos crear las reglas en Ingress
 
-## Ingress: creación de reglas en punto de entrada 
+## Ingress: creación de reglas por path
 
 Véase ingress-rules.yml
     - **Manejo de atributo ingressClassName:** The ingressClassName attribute in an Ingress resource tells Kubernetes which Ingress Controller should handle this Ingress rule.
@@ -62,6 +63,13 @@ Véase ingress-rules.yml
         - Para saber cuál es el nombre **kubectl get ingressclass** nos indica el controller creado (en el ejemplo, a partir de nginx-controller.yml) y **su nombre**.
             - Este nombre es el que debemos asignar a ingressClassName.
 - Ahora, al invocar http://192.168.49.2:30784/appv1 vemos la salida correcta (IP asignada para red fuera del cluster:port asignado / path asignado en rules)
+
+#### Creación de reglas por host (DNS)
+
+- Apply de **ingress-rules_2.yml**. Creamos domain ficticio (OJO tener habilitado el tunnel para acceso a IngressController, ver apartado más arriba)
+- Podemos acceder con **curl -H "Host: v1.mydomain.com" http://192.168.49.2:30784/appv1**
+
+
 
 #### Manejo de Errores
 

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-test
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx  #OJO AQUÍ: vease README
+  rules:
+  - host: "v1.mydomain.com"
+    http:
+      paths:
+      - path: /appv1
+        pathType: Prefix # Obligatorio
+        backend:
+          service:
+            name: app-v1 #servicio ClusterIp creado en ingress-example.yml
+            port:
+              number: 8080  # puerto del service que definimos en ingress-example.yml
