@@ -1,7 +1,12 @@
 
 ## Ingress Controller
 
+Pasos a seguirr:
+
+- Creamos pods
+- Creamos ClusterIP para acceso a los pods y verificamos acceso desde un pod temporal
 - Creamos Ingress Controller a mano (**no como minikube addon**)
+- Creamos Ingress Rules manejadas por Ingress Controller
 
 ### Instalación como minikube addon
 
@@ -36,15 +41,32 @@
 - Para ejecutar un tunnel y hacer accesible cualquier servicio podemos hacer un tunnel con
     - **minikube service ingress-nginx-controller -n ingress-nginx  --url [url]**. (ponemos '/' como url)
         - Al ejecutar la instrucción anterior, el tunnel abre dos ip **externas al cluster k8s** (una mapeando el puerto 80 y otra para el 443). La web de nginx es accesible desde el navegador. La url al puerto 80 será el puerto de entrada.
+            - http://192.168.49.2:30784       # port 80
+            - http://192.168.49.2:30679       # 443
+
 
 ## Creación de service para enrutamiento a los pods
 
 - Apply de ingress-example.yml
     - Creamos pods en **namespace default**. Modificamos el cmd del pod añadiendo instrucción específica de arranque
     - **Creamos Service ClusterIP** para acceso **interno** al Deployment.
-        - **Probamos el service:** Creamos pod temporal, entramos en él (**kubectl exec -it podName -- sh**) y ejecutamos curl a **app/v1:8080**. Vemos salida configurada nginx en ingress-example.yml. OJO que aplicación todavía no está expuesta en el cluster, tan sólo llegamos a página de inicio de nginx. Necesitamos crear las reglas en Ingress
+        - **Probamos el service accesible:** Creamos pod temporal, entramos en él (**kubectl exec -it podName -- sh**) y ejecutamos **curl app-v1:8080**.
+        - El servicio está accesible: vemos salida configurada nginx en ingress-example.yml.
+        - OJO que aplicación todavía no está expuesta desde fuera del cluster, tan sólo llegamos a página de inicio de nginx (que hemos modificado). Necesitamos crear las reglas en Ingress
 
 ## Ingress: creación de reglas en punto de entrada 
 
-**NOTA:**
-- Usar **kubectl describe pods/pod-xxxxxx** para ver errores (con **-w para watch**). **kubectl get pods/pod-xxxx -o yaml** también.
+Véase ingress-rules.yml
+    - **Manejo de atributo ingressClassName:** The ingressClassName attribute in an Ingress resource tells Kubernetes which Ingress Controller should handle this Ingress rule.
+        -**It must match the ingressClass resource that was registered by your Ingress Controller**.
+        - Para saber cuál es el nombre **kubectl get ingressclass** nos indica el controller creado (en el ejemplo, a partir de nginx-controller.yml) y **su nombre**.
+            - Este nombre es el que debemos asignar a ingressClassName.
+- Ahora, al invocar http://192.168.49.2:30784/appv1 vemos la salida correcta (IP asignada para red fuera del cluster:port asignado / path asignado en rules)
+
+#### Manejo de Errores
+
+- **Errores en despliegue de pods**: Usar **kubectl describe pods/pod-xxxxxx** para ver errores (con **-w para watch**). **kubectl get pods/pod-xxxx -o yaml** también.
+- **Errores en enrutamientos desde Controller/Rules a Service**: Ver pods en namespace ingress-nginx (el controller es uno de ellos)
+    - Ver logs de arranque del Controller con **kubectl -n ingress-nginx logs -f ingress-nginx-controller-xxxxxxx**
+        - Cuando los enrutamientos son correctos, la traza arroja los bindings de ruta y también peticiones que van llegando.
+
