@@ -10,11 +10,11 @@
 - File svc2.yaml: Inclusión de tipo de cluster en el Service. Delete service anterior y aplicación del nuevo:
 	- kubectl delete -f svc.yaml
 	- kubectl apply -f svc2.yaml
-- File nodeport.yaml: Utilización de <b>nodeport</b> en lugar de <b>ClusterIP</b>.
+- File nodeport.yaml: Utilización de **nodeport** en lugar de <b>ClusterIP**.
 	- OJO que cambian los nombres del deployment y del service
 	- Hacemos apply del NodePort con svc.yaml también desplegado.
-	- get pods muestra los 6 pods (filtramos con <b>kubectl get pods -l app=front</b> o <b>app=backend</b>)
-	- <b>kubectl get svc</b> arroja ambos servicios (my-service y my-service1, además de kubernetes)
+	- get pods muestra los 6 pods (filtramos con <b>kubectl get pods -l app=front** o <b>app=backend**)
+	- <b>kubectl get svc** arroja ambos servicios (my-service y my-service1, además de kubernetes)
 		- Bajo PORT(S) vemos el port que expone NodePort (p.ej. 8080:31078/TCP)
 
 Para accesos desde fuera del cluster k8s a los servicios expuestos, véanse las siguientes secciones **Port Forwarding** y **minikube tunnel**

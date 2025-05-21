@@ -7,11 +7,11 @@ Pasos a ejecutar:
 #### 1.- Creación del master
 
 Pasos a ejecutar:
-- Crear cuenta y user IAM con permisos administrador
+- Crear cuenta y user IAM con permisos administrador y permisos de acceso a CLI
 - Instalar aws cli
 - Instalar eksctl
 - Seleccionar zonas deseadas (Virginia, us-east-1, p.ej.)
-- Crear el **master en AWS** sin crear ningún grupo de nodes (lo añadiremos más tarde)
+- Crear el **master en AWS sin crear ningún grupo de nodes** (lo añadiremos más tarde)
     - Ejecutar **eksctl create cluster --name test-cluster --region us-east-1 --zones us-east-1a,us-east-1b --version 1.32 --without-nodegroup**
         - (Opcional) Version hace referencia a k8s version, ejecutar **kubectl version** para conocer.
         - Zonas de disponibilidad **zones**
@@ -24,6 +24,7 @@ Pasos a ejecutar:
 #### 2.- Creación de nodes
 
 - **kubectl get nodes -o wide** indica que aún no existen nodos, no podemos crear pods aún. Seleccionaremos **Managed node group** (para personalizar)
+    - **Unmanaged node groups** no son mostrados en consola AWS.
 - Creamos node:
     - **eksctl create nodegroup --cluster=test-cluster --name=test-workers --node-type=t3.medium --nodes=1 --nodes-min=1 --nodes-max=3 --asg-access --spot**
         - **name**: nombre del cluster
@@ -32,6 +33,10 @@ Pasos a ejecutar:
 - Al crear el nodo, lo vincula a instancias EC2 de AWS. Es posible administrar también desde AWS Console.
 
 
-####  Creación de pods
+####  3.- Creación de pods
 
 - **kubectl run nginx-pod --image=nginx:alpine --restart=Never**
+
+####  4.- Adición de Ingress
+
+- **[Ingress](EKS/README.md)**
