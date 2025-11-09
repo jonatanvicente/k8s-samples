@@ -30,6 +30,7 @@ Pasos a ejecutar:
         - **name**: nombre del cluster
         - **node-type**: tipo de la instancia de máquina
         - **asg-access**: tipo de política de acceso
+        - **Máximo de nodos:** no podrá ser rebasado por Cluster Autoscaler aunque los precise.
 - Al crear el nodo, lo vincula a instancias EC2 de AWS. Es posible administrar también desde AWS Console.
 
 

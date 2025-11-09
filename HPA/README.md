@@ -25,8 +25,17 @@
                 -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
 ```
 
-- Observamos escalado **kubectl get hpa php-apache -w**
+- Observamos escalado **watch kubectl get pods** (Linux command, execute/display a program periodically) o bien **kubectl get hpa php-apache -w**
+    - Al subir el consumo de CPU, HPA crea nuevos pods que puedan manejar las solicitudes, autoescalando nuestros pods cuando la CPU pasa de un determinado porcentaje.
+    - Para escalar hacia abajo, HPA tarda más (intentando prever si hubiese otra subida)
 - Borramos el Deployment: **kubectl delete deployment.apps/php-apache service/php-apache horizontalpodautoscaler.autoscaling/php-apache**
+
+
+#### ¿Qué sucede si no hay más nodos disponibles para los pods que HPA está creando?
+
+- No importa si colocamos un máximo de pods exagerado: si no hay nodos suficientes, k8s no podrá crear los últimos pods que HPA demande.
+- La última réplica del pod no llegará a crearse (CPU insuficiente).
+- Para que un nodo sea automáticamente creado (o eliminado en escalada hacia abajo), necesitaremos user el **Cluster Autoscaler**.
 
 #### Parametrización
 

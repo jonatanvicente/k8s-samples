@@ -24,6 +24,7 @@ Content:
 - **[Service Account](service-account/README.md)**
 - **[Ingress](ingress/README.md)**
 - **[AWS Elastic Kubernetes Service](EKS/README.md)**
+- **[Horizontal Pod Autoscaler HPA](HPA/README.md)**
 
 
 
