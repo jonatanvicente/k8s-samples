@@ -3,7 +3,7 @@
 
 #### Liveness
 
-En el ejemplo liveness-tcp.yml, ejecutamos los siguientes pasos:
+En el ejemplo liveness-cmd.yml, ejecutamos los siguientes pasos:
 * Creación de un container que crea un file, duerme 30 segundos, elimina el file y duerme 600 segundos
 * **Secuencia del liveness:**
     * Cada 5 segundos hace un cat del file. Cuando llegue al intervalo de 35 segundos, dará un fail
